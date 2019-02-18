@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+//开发 Vue 插件 设置拦截器
 const HttpServer = {}
 HttpServer.install = function (Vue) {
 

@@ -11,28 +11,34 @@
           <el-row v-for="(item,i) in scope.row.children" :key="item.id">
             <!-- 第一列 -->
             <el-col :span="4">
-              {{item.id}}
+              <!-- 一级 -->
+              <!-- {{item.id}} -->
               <el-tag
                 @close="delRights(scope.row,item)"
                 type="success"
                 class="tag1"
                 closable
               >{{item.authName}}</el-tag>
+              <i class="el-icon-arrow-right"></i>
             </el-col>
             <!-- 第二列 -->
             <el-col :span="20">
+              
               <el-row v-for="(item1,i) in item.children" :key="item1.id">
                 <!-- 第一列 -->
                 <el-col :span="4">
+                  <!-- 二级 -->
                   <el-tag
                     @close="delRights(scope.row,item1)"
                     type="danger"
                     class="tag2"
                     closable
                   >{{item1.authName}}</el-tag>
+                  <i class="el-icon-arrow-right"></i>
                 </el-col>
                 <!-- 第二列 -->
                 <el-col :span="20">
+                  <!-- 三级 -->
                   <el-tag
                     @close="delRights(scope.row,item2)"
                     type="warning"
@@ -42,6 +48,12 @@
                   >{{item2.authName}}</el-tag>
                 </el-col>
               </el-row>
+            </el-col>
+          </el-row>
+
+          <el-row v-if="scope.row.children.length===0"> 
+            <el-col>
+              <span>未分配角色</span>
             </el-col>
           </el-row>
         </template>
@@ -130,11 +142,10 @@ export default {
       const {
         meta: { status, msg }
       } = res.data;
-      if(status === 200) {
-        this.$message.success(msg)
-        this.dialogFormVisible = false
+      if (status === 200) {
+        this.$message.success(msg);
+        this.dialogFormVisible = false;
       }
-      
     },
 
     //  点对勾弹出对话框 获取数据 rights/:type

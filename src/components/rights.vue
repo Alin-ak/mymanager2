@@ -36,7 +36,7 @@ export default {
     async getTableData() {
       // 封装axios 插件
       const res = await this.$http.get(`rights/list`);
-      console.log(res)
+      // console.log(res)
       this.list = res.data.data
       
     }
