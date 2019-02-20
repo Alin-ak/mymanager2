@@ -75,7 +75,7 @@ export default {
         pagenum:1,
         pagesize:7,
         query:'',
-        total:949
+        total:-1
     };
   },
   created() {
@@ -96,6 +96,7 @@ export default {
             const {meta:{msg,status}} = res.data
             if(status === 200){
                 this.$message.success(msg)
+                this.getAllGoods()
             }
         }).catch(() => {
           this.$message({
@@ -106,13 +107,13 @@ export default {
       },
       
     // 显示添加商品对话框
-    showAddGoods() {},
-
+    showAddGoods() {this.$router.push({name:"goodsadd"})},
+        
     // 搜索商品
-   searchGoods() {
-       
-    },
-
+    searchGoods() {
+        
+      },
+    
     // 页数发生变化时
     handleCurrentChange(val) {
       // this.pagesize = 1;
@@ -132,6 +133,7 @@ export default {
         const {data,meta:{status}} = res.data
         if(status === 200) {
             this.list = data.goods
+            this.total = data.total
             
         }
         // console.log(this.list)
