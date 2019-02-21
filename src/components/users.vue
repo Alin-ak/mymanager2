@@ -20,7 +20,7 @@
       <el-button type="success" plain @click="showAddUsers()">添加用户</el-button>
     </el-row>
     <!-- 表格 -->
-    <el-table :data="list" style="width: 100%">
+    <el-table :data="list" style="width: 100%" v-loading="loading">
       <el-table-column prop="id" label="#" width="100"></el-table-column>
       <el-table-column prop="username" label="姓名" width="120"></el-table-column>
       <el-table-column prop="email" label="邮箱" width="140"></el-table-column>
@@ -167,7 +167,8 @@ export default {
       },
       roles:[],
       selectVal:-1,
-      userId:-1
+      userId:-1,
+      loading:true,
     };
   },
   created() {
@@ -304,7 +305,7 @@ export default {
       } = res.data;
       if (status === 200) {
         // 请求数据成功
-
+        this.loading = false
         this.list = data.users;
         this.total = data.total;
         // console.log(this.total)
