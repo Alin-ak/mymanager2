@@ -45,7 +45,8 @@
         treeKey="cat_id"
         childKey="children"
         parentKey="cat_pid"
-        levelKey="cat_level"> </el-tree-grid>
+        levelKey="cat_level"> 
+        </el-tree-grid>
 
 
       <el-table-column label="级别">

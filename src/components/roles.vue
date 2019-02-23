@@ -3,7 +3,7 @@
     <CurBread lve1="权限管理" lve2="角色列表"></CurBread>
     <el-button type="info" plain class="mr">添加角色</el-button>
 
-    <el-table class="mr" :data="list" style="width: 100%">
+    <el-table class="mr" :data="list" style="width: 100%" @expand-change="fn" >
       <el-table-column type="expand">
         <!-- 所有行列布局都用for嵌套 -->
         <!-- 将表格分成一行两列  布局比例4:20 在第二列再分一行两列 比例为4:20 通过span-->
@@ -128,6 +128,11 @@ export default {
     this.getTableData();
   },
   methods: {
+    fn (row, expandedRows) {
+      if(expandedRows.length>1) {
+          expandedRows.shift()
+      }
+    },
     // 弹出对话框点击确定后角色授权 roles/:roleId/rights rids权限ID列表以 , 分割的权限ID列表
     async editRoleRigths() {
       const arr1 = this.$refs.treeDom.getCheckedKeys();

@@ -18,9 +18,10 @@
     <el-container>
       <el-aside width="200px" class="homeAside">
            <el-menu
+      @select="fn"     
       router
       unique-opened
-      default-active="2"
+      :default-active="$route.name"
       class="el-menu-vertical-demo">
       
       <el-submenu :index="item.order+''" v-for="(item,i) in list" :key="item.id">
@@ -64,6 +65,9 @@ export default {
     this.getRigths()
   },
   methods: {
+    fn(index,indexPath) {
+      // console.log(indexPath)
+    },
       // 根据用户权限显示对应导航内容
     async getRigths(){
         const res = await this.$http.get(`menus`)

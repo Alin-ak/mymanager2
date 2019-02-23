@@ -20,7 +20,7 @@
         <el-tab-pane label="动态参数" name="1">
           <el-button disabled>设置参数</el-button>
           <!-- 数据表格 -->
-          <el-table :data="attrDt" style="width: 100%" height="480">
+          <el-table :data="attrDt" style="width: 100%" height="480" @expand-change="fn">
             <el-table-column type="expand" width="100">
               <template slot-scope="scope">
                 <el-tag
@@ -115,6 +115,11 @@ export default {
     this.getattrData();
   },
   methods: {
+      fn (row, expandedRows) {
+      if(expandedRows.length>1) {
+          expandedRows.shift()
+      }
+    },
     // categories/:id/attributes/:attrId 删除参数
     async handleClose(obj, item) {
       obj.attr_vals.splice(obj.attr_vals.indexOf(item), 1);
